@@ -3,11 +3,27 @@
 //  tldr
 //
 //  Created by Daniel Muckerman on 1/3/16.
-//  Copyright © 2016 Daniel Muckerman. All rights reserved.
+//  Copyright © 2016 Daniel Muckerman
 //
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
 
 import UIKit
-//import SwiftyJSON
 
 class ViewController: UIViewController {
     var commands: [String: [JSON]] = [:]
@@ -73,14 +89,10 @@ class ViewController: UIViewController {
         let info : NSDictionary = notification.userInfo!
         let keyboardSize = info.objectForKey(UIKeyboardFrameBeginUserInfoKey)?.CGRectValue
         
-//        let insets: UIEdgeInsets = UIEdgeInsetsMake(self.scrollView.contentInset.top, 0, keyboardSize!.height, 0)
-        
         let insets: UIEdgeInsets = UIEdgeInsetsMake(markdownPage.scrollView.contentInset.top, 0, keyboardSize!.height, 0)
         
         markdownPage.scrollView.contentInset = insets
         markdownPage.scrollView.scrollIndicatorInsets = insets
-        
-        //markdownPage.scrollView.contentOffset = CGPointMake(markdownPage.scrollView.contentOffset.x, markdownPage.scrollView.contentOffset.y)
     }
     
     func keyboardWillBeHidden (notification: NSNotification) {
@@ -88,8 +100,6 @@ class ViewController: UIViewController {
         
         markdownPage.scrollView.contentInset = insets
         markdownPage.scrollView.scrollIndicatorInsets = insets
-        
-        //markdownPage.scrollView.contentOffset = CGPointMake(markdownPage.scrollView.contentOffset.x, markdownPage.scrollView.contentOffset.y)
     }
 
     @IBAction func didSearch(sender: UITextField) {
@@ -106,7 +116,6 @@ class ViewController: UIViewController {
                     let text2 = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
                     let styled = "<head>\n\t<style>\n\tbody {\n\t\tfont-size: 1.05em !important;\n\t\tmargin-top: 0.5em !important; }\n\t\n\tp {\n\t\tmargin: 0 !important; }\n\th1 {\n\t\tfont-size: 2em !important;\n\t\tmargin: 0 0.23em; }\n\t\n\tblockquote {\n\t\tmargin: 0 0.55em; }\n\t\n\tcode {\n\t\tfont-family: \"Source Code Pro\", courier new, courier;\n\t\tbackground-color: #f2f2f2;\n\t\tcolor: #212121;\n\t\tdisplay: block;\n\t\tfont-size: 0.9em !important;\n\t\tpadding: 0.55em 1.25em;\n\t\tmargin: 0; }\n\t\n\tul {\n\t\tlist-style: none;\n\t\tpadding: 0 !important;\n\t\tmargin: 1em 0 0 0; }\n\t\n\tul li {\n\t\tpadding: 0.5em 0.55em;\n\t\tline-height: 1.1; }\n\t@media only screen and (orientation: landscape) {\n\t\tbody {\n\t\t\tmargin-top: 5em; } }\n\t@media only screen and (min-device-width: 1024px) {\n\t\tbody {\n\t\t\tfont-size: 1em;\n\t\t\tmargin-top: 3em; }\n\t\tcode {\n\t\t\tpadding-left: 3em; }\n\t\tul {\n\t\t\tmargin-top: 1em; }\n\t\tage ul li:before {\n\t\t\tcontent: \"*\";\n\t\t\tpadding: 0 12px; } }\n\t</style>\n</head>\n<body>" + markdown.transform(text2 as String) + "</body>"
                     markdownPage.loadHTMLString(styled, baseURL: nil)
-                    print(styled)
                 } catch let error as NSError {
                     print(error.localizedDescription)
                 }

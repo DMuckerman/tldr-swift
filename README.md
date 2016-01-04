@@ -1,29 +1,12 @@
-# README #
+# tdlr-swift
 
-This README would normally document whatever steps are necessary to get your application up and running.
+tldr-swift is an iOS client for [tldr-pages](https://github.com/tldr-pages/tldr)
 
-### What is this repository for? ###
+## Libraries used
+* [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON)
+* [Markingbird](https://github.com/kristopherjohnson/Markingbird)
+* [tldr-pages](https://github.com/tldr-pages/tldr)
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+## License
 
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+tldr-swift is licensed under the MIT License
