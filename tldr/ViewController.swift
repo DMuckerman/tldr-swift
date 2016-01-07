@@ -104,12 +104,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             //navBar.barStyle = UIBarStyle.Black
             navBar.barTintColor = UIColor ( red: 0.349, green: 0.349, blue: 0.349, alpha: 1.0 )
             self.view.backgroundColor = UIColor ( red: 0.3882, green: 0.3882, blue: 0.3882, alpha: 1.0 )
-            UIApplication.sharedApplication().statusBarStyle = .LightContent
             textInput.backgroundColor = UIColor ( red: 0.5412, green: 0.5412, blue: 0.5412, alpha: 1.0 )
             textInput.textColor = UIColor.whiteColor()
+            UIApplication.sharedApplication().statusBarStyle = .LightContent
             navBar.tintColorDidChange()
             self.setNeedsStatusBarAppearanceUpdate()
             self.view.setNeedsDisplay()
+            self.tableView.reloadData()
         } else {
             textInput.keyboardAppearance = UIKeyboardAppearance.Light;
             //navBar.barStyle = UIBarStyle.Default
@@ -120,6 +121,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             UIApplication.sharedApplication().statusBarStyle = .Default
             self.setNeedsStatusBarAppearanceUpdate()
             self.view.setNeedsDisplay()
+            self.tableView.reloadData()
         }
         
         textInput.becomeFirstResponder()
@@ -139,6 +141,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let row = indexPath.row
         cell.textLabel?.text = items[row]
+        
+        if (isDarkTheme) {
+            cell.backgroundColor = UIColor ( red: 0.3882, green: 0.3882, blue: 0.3882, alpha: 1.0 )
+            cell.textLabel?.textColor = UIColor.whiteColor()
+        } else {
+            cell.backgroundColor = UIColor ( red: 0.9765, green: 0.9765, blue: 0.9765, alpha: 1.0 )
+            cell.textLabel?.textColor = UIColor.blackColor()
+        }
         
         var frame = tableView.frame
         frame.size.height = tableView.contentSize.height
@@ -217,7 +227,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         markdownPage.scrollView.contentInset = insets
         markdownPage.scrollView.scrollIndicatorInsets = insets
-        tableView.hidden = false
+        
+        if (items.count > 1) {
+            tableView.hidden = false
+        }
     }
     
     // Selector for keyboard hidden notification
