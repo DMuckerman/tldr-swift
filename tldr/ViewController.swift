@@ -107,7 +107,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             UIApplication.sharedApplication().statusBarStyle = .LightContent
             navBar.tintColorDidChange()
             self.setNeedsStatusBarAppearanceUpdate()
-            self.view.setNeedsDisplay()
+            loadPage(commands[textInput.text!], text: textInput.text!)
             self.tableView.reloadData()
         } else {
             textInput.keyboardAppearance = UIKeyboardAppearance.Light;
@@ -118,7 +118,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             textInput.textColor = UIColor.blackColor()
             UIApplication.sharedApplication().statusBarStyle = .Default
             self.setNeedsStatusBarAppearanceUpdate()
-            self.view.setNeedsDisplay()
+            loadPage(commands[textInput.text!], text: textInput.text!)
             self.tableView.reloadData()
         }
         
@@ -174,7 +174,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if let path = NSBundle.mainBundle().pathForResource(path, ofType: "md") {
             do {
                 let text2 = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
-                let styled = "<head>\n\t<style>\n\tbody {\n\t\tfont-size: 1.05em !important;\n\t\tmargin-top: 0.5em !important; }\n\t\n\tp {\n\t\tmargin: 0 !important; }\n\th1 {\n\t\tfont-size: 2em !important;\n\t\tmargin: 0 0.23em; }\n\t\n\tblockquote {\n\t\tmargin: 0 0.55em; }\n\t\n\tcode {\n\t\tfont-family: \"Source Code Pro\", courier new, courier;\n\t\tbackground-color: #f2f2f2;\n\t\tcolor: #212121;\n\t\tdisplay: block;\n\t\tfont-size: 0.9em !important;\n\t\tpadding: 0.55em 1.25em;\n\t\tmargin: 0; }\n\t\n\tul {\n\t\tlist-style: none;\n\t\tpadding: 0 !important;\n\t\tmargin: 1em 0 0 0; }\n\t\n\tul li {\n\t\tpadding: 0.5em 0.55em;\n\t\tline-height: 1.1; }\n\t@media only screen and (orientation: landscape) {\n\t\tbody {\n\t\t\tmargin-top: 5em; } }\n\t@media only screen and (min-device-width: 1024px) {\n\t\tbody {\n\t\t\tfont-size: 1em;\n\t\t\tmargin-top: 3em; }\n\t\tcode {\n\t\t\tpadding-left: 3em; }\n\t\tul {\n\t\t\tmargin-top: 1em; }\n\t\tage ul li:before {\n\t\t\tcontent: \"*\";\n\t\t\tpadding: 0 12px; } }\n\t</style>\n</head>\n<body>" + markdown.transform(text2 as String) + "</body>"
+                var styled = ""
+                if (isDarkTheme) {
+                    styled = "<head>\n\t<style>\n\tbody {\n\t\tfont-size: 1.05em !important;\n\t\tmargin-top: 0.5em !important;\n\t\tbackground-color: #2B303B !important;\n\t\tcolor: #C0C5CE !important;\n\t\tfont-family: -apple-system, Helvetica, Arial, sans-serif;}\n\t\n\tp {\n\t\tmargin: 0 !important; }\n\th1 {\n\t\tfont-size: 2em !important;\n\t\tmargin: 0 0.23em; }\n\t\n\tblockquote {\n\t\tmargin: 0 0.55em; }\n\t\n\tcode {\n\t\tfont-family: \"Source Code Pro\", courier new, courier;\n\t\tbackground-color: #343D46;\n\t\tcolor: #BE6369;\n\t\tdisplay: block;\n\t\tfont-size: 1em !important;\n\t\tpadding: 0.55em 1.25em;\n\t\tmargin: 0; }\n\t\n\tul {\n\t\tlist-style: none;\n\t\tpadding: 0 !important;\n\t\tmargin: 1em 0 0 0; }\n\t\n\tul li {\n\t\tpadding: 0.5em 0.55em;\n\t\tline-height: 1.1; }\n\t@media only screen and (orientation: landscape) {\n\t\tbody {\n\t\t\tmargin-top: 5em; } }\n\t@media only screen and (min-device-width: 1024px) {\n\t\tbody {\n\t\t\tfont-size: 1em;\n\t\t\tmargin-top: 3em; }\n\t\tcode {\n\t\t\tpadding-left: 3em; }\n\t\tul {\n\t\t\tmargin-top: 1em; }\n\t\tage ul li:before {\n\t\t\tcontent: \"*\";\n\t\t\tpadding: 0 12px; } }\n\t</style>\n</head>\n<body>" + markdown.transform(text2 as String) + "</body>"
+                } else {
+                    styled = "<head>\n\t<style>\n\tbody {\n\t\tfont-size: 1.05em !important;\n\t\tmargin-top: 0.5em !important;\n\t\tbackground-color: #EFF1F5 !important;\n\t\tcolor: #4F5B67 !important;\n\t\tfont-family: -apple-system, Helvetica, Arial, sans-serif;}\n\t\n\tp {\n\t\tmargin: 0 !important; }\n\th1 {\n\t\tfont-size: 2em !important;\n\t\tmargin: 0 0.23em; }\n\t\n\tblockquote {\n\t\tmargin: 0 0.55em; }\n\t\n\tcode {\n\t\tfont-family: \"Source Code Pro\", courier new, courier;\n\t\tbackground-color: #DFE1E8;\n\t\tcolor: #BE6369;\n\t\tdisplay: block;\n\t\tfont-size: 1em !important;\n\t\tpadding: 0.55em 1.25em;\n\t\tmargin: 0; }\n\t\n\tul {\n\t\tlist-style: none;\n\t\tpadding: 0 !important;\n\t\tmargin: 1em 0 0 0; }\n\t\n\tul li {\n\t\tpadding: 0.5em 0.55em;\n\t\tline-height: 1.1; }\n\t@media only screen and (orientation: landscape) {\n\t\tbody {\n\t\t\tmargin-top: 5em; } }\n\t@media only screen and (min-device-width: 1024px) {\n\t\tbody {\n\t\t\tfont-size: 1em;\n\t\t\tmargin-top: 3em; }\n\t\tcode {\n\t\t\tpadding-left: 3em; }\n\t\tul {\n\t\t\tmargin-top: 1em; }\n\t\tage ul li:before {\n\t\t\tcontent: \"*\";\n\t\t\tpadding: 0 12px; } }\n\t</style>\n</head>\n<body>" + markdown.transform(text2 as String) + "</body>"
+                }
                 markdownPage.loadHTMLString(styled, baseURL: nil)
             } catch let error as NSError {
                 print(error.localizedDescription)
@@ -218,14 +223,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Selector for keyboard shown notification
     func keyboardWasShown (notification: NSNotification) {
-        let info : NSDictionary = notification.userInfo!
-        let keyboardSize = info.objectForKey(UIKeyboardFrameBeginUserInfoKey)?.CGRectValue
-        
-        let insets: UIEdgeInsets = UIEdgeInsetsMake(markdownPage.scrollView.contentInset.top, 0, keyboardSize!.height, 0)
-        
-        markdownPage.scrollView.contentInset = insets
-        markdownPage.scrollView.scrollIndicatorInsets = insets
-        
         if (items.count > 1) {
             tableView.hidden = false
         }
@@ -233,10 +230,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Selector for keyboard hidden notification
     func keyboardWillBeHidden (notification: NSNotification) {
-        let insets: UIEdgeInsets = UIEdgeInsetsMake(markdownPage.scrollView.contentInset.top, 0, 0, 0)
-        
-        markdownPage.scrollView.contentInset = insets
-        markdownPage.scrollView.scrollIndicatorInsets = insets
         tableView.hidden = true
     }
     
@@ -246,7 +239,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         markdownPage.scrollView.contentOffset = CGPoint(x: 0, y: 0)
         
         // Get the platforms for the current command
-        var result = commands[sender.text!]
+        loadPage(commands[sender.text!], text: sender.text!)
+    }
+    
+    func loadPage(result: [JSON]?, text: String) {
+        // Get the platforms for the current command
         if (result != nil) { // If the platforms list isn't nil
             // Empty the platforms tableview
             items.removeAll()
@@ -267,16 +264,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             // Load the tldr page
             var path = ""
             if (defaultOS == "1" && result!.contains("osx")) { // OS X
-                path = "pages/osx/\(sender.text!)"
+                path = "pages/osx/\(text)"
             } else if (defaultOS == "2" && result!.contains("linux")) { // OS X
-                path = "pages/linux/\(sender.text!)"
+                path = "pages/linux/\(text)"
             } else {
-                path = "pages/\(result![0])/\(sender.text!)"
+                path = "pages/\(result![0])/\(text)"
             }
             loadMarkdown(path)
         } else {
             // Load an empty page
-            markdownPage.loadHTMLString("", baseURL: nil)
+            if(isDarkTheme) {
+                tableView.backgroundColor = UIColor ( red: 0.1686, green: 0.1882, blue: 0.2314, alpha: 1.0 )
+                markdownPage.backgroundColor = UIColor.clearColor()
+                markdownPage.loadHTMLString("<head>\n\t<style>\n\tbody {\n\t\tfont-size: 1.05em !important;\n\t\tmargin-top: 0.5em !important;\n\t\tbackground-color: #2B303B !important;\n\t\tcolor: #C0C5CE !important;\n\t\tfont-family: -apple-system, Helvetica, Arial, sans-serif;}\n\t</style>\n</head>\n<body>\n</body>", baseURL: nil)
+            } else {
+                tableView.backgroundColor = UIColor ( red: 0.9373, green: 0.9451, blue: 0.9608, alpha: 1.0 )
+                markdownPage.backgroundColor = UIColor.clearColor()
+                markdownPage.loadHTMLString("<head>\n\t<style>\n\tbody {\n\t\tfont-size: 1.05em !important;\n\t\tmargin-top: 0.5em !important;\n\t\tbackground-color: #EFF1F5 !important;\n\t\tcolor: #4F5B67 !important;\n\t\tfont-family: -apple-system, Helvetica, Arial, sans-serif;}\n\t</style>\n</head>\n<body>\n</body>", baseURL: nil)
+            }
             
             // Make sure the platforms list is empty
             items.removeAll()
