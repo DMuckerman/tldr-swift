@@ -9,9 +9,9 @@ tldr-swift is an iOS client for [tldr-pages](https://github.com/tldr-pages/tldr)
 * [iOS-AcknowledgementGenerator](https://github.com/cvknage/iOS-AcknowledgementGenerator)
 
 ## Screenshots
-![https://bytebucket.org/dmuckerman/tldr-swift/raw/3d78aeced0e4111535bd7f6ab4bf34e4622e9adf/IMG_0849.jpg](https://bitbucket.org/repo/y6nnxE/images/483212234-IMG_0848.jpg))
-![https://bytebucket.org/dmuckerman/tldr-swift/raw/3d78aeced0e4111535bd7f6ab4bf34e4622e9adf/IMG_0849.jpg](https://bytebucket.org/dmuckerman/tldr-swift/raw/3d78aeced0e4111535bd7f6ab4bf34e4622e9adf/IMG_0849.jpg)
-![https://bytebucket.org/dmuckerman/tldr-swift/raw/3d78aeced0e4111535bd7f6ab4bf34e4622e9adf/IMG_0849.jpg](https://bytebucket.org/dmuckerman/tldr-swift/raw/3d78aeced0e4111535bd7f6ab4bf34e4622e9adf/IMG_0850.jpg)
+![IMG_0848.jpg](https://bitbucket.org/repo/y6nnxE/images/3645183502-IMG_0848.jpg)
+![IMG_0849.jpg](https://bitbucket.org/repo/y6nnxE/images/4084404435-IMG_0849.jpg)
+![IMG_0850.jpg](https://bitbucket.org/repo/y6nnxE/images/1903334214-IMG_0850.jpg)
 
 ## License
 
