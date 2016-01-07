@@ -1,4 +1,4 @@
-# top
+# top (Linux)
 
 > Display dynamic real-time information about running processes.
 

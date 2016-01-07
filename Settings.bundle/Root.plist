@@ -17,11 +17,13 @@
 			<string>0</string>
 			<key>Values</key>
 			<array>
+				<string>0</string>
 				<string>1</string>
 				<string>2</string>
 			</array>
 			<key>Titles</key>
 			<array>
+				<string>None</string>
 				<string>OS X</string>
 				<string>Linux</string>
 			</array>

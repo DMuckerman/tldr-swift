@@ -1,4 +1,4 @@
-# ssh-copy-id
+# ssh-copy-id (Linux)
 
 > Install your public key in a remote machine's authorized_keys.
 

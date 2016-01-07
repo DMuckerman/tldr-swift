@@ -1,4 +1,4 @@
-# xargs
+# xargs (Linux)
 
 > execute a command with piped arguments
 

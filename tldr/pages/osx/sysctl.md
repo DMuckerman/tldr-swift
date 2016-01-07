@@ -1,4 +1,4 @@
-# sysctl
+# sysctl (OS X)
 
 > Access kernel state information
 

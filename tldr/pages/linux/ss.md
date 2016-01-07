@@ -1,4 +1,4 @@
-# ss
+# ss (Linux)
 
 > Utility to investigate sockets
 

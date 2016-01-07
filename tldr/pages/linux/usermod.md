@@ -1,4 +1,4 @@
-# usermod
+# usermod (Linux)
 
 > Modifies a user account
 

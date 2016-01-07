@@ -1,4 +1,4 @@
-# svcs
+# svcs (SunOS)
 
 > List information about running services
 

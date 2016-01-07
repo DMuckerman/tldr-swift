@@ -1,4 +1,4 @@
-# journalctl
+# journalctl (Linux)
 
 > Query the systemd journal
 

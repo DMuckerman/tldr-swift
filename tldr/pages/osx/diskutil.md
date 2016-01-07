@@ -1,4 +1,4 @@
-# diskutil
+# diskutil (OS X)
 
 > Utility to manage local disks and volumes
 

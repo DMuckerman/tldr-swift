@@ -1,4 +1,4 @@
-# say
+# say (OS X)
 
 > Uses text to speech to speak through the default sound device
 

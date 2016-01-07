@@ -1,4 +1,4 @@
-# sha512sum
+# sha512sum (Linux)
 
 > Calculate SHA512 cryptographic checksums
 

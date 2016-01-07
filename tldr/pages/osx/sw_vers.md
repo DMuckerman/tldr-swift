@@ -1,4 +1,4 @@
-# sw_vers
+# sw_vers (OS X)
 
 > Print Mac OSX Software versioning information
 

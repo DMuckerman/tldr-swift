@@ -1,4 +1,4 @@
-# lsb_release
+# lsb_release (Linux)
 
 > Provides certain LSB (Linux Standard Base) and distribution-specific information
 

@@ -1,4 +1,4 @@
-# system_profiler
+# system_profiler (OS X)
 
 > Report system hardware and software configuration
 

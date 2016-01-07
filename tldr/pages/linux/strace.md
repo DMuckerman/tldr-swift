@@ -1,4 +1,4 @@
-# strace
+# strace (Linux)
 
 > Troubleshooting tool for tracing system calls
 

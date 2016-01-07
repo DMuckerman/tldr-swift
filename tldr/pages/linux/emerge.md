@@ -1,4 +1,4 @@
-# emerge
+# emerge (Linux)
 
 > Gentoo Linux package manager utility
 

@@ -1,4 +1,4 @@
-# Airport
+# Airport (OS X)
 
 > Airport utility
 

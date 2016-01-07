@@ -1,4 +1,4 @@
-# prstat
+# prstat (SunOS)
 
 > Report active process statistics
 

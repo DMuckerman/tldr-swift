@@ -1,4 +1,4 @@
-# xsetwacom
+# xsetwacom (Linux)
 
 > Command line tool to change settings for Wacom pen tablets at runtime.
 

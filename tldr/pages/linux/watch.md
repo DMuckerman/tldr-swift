@@ -1,4 +1,4 @@
-# watch
+# watch (Linux)
 
 > Execute a command repeatedly, and monitor the output in full-screen mode
 

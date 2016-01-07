@@ -1,4 +1,4 @@
-# ulimit
+# ulimit (Linux)
 
 > Get and set user limits
 

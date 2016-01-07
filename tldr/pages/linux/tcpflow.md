@@ -1,4 +1,4 @@
-# tcpflow
+# tcpflow (Linux)
 
 > Capture TCP traffic for debugging and analysis
 

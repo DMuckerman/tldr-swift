@@ -1,4 +1,4 @@
-# du
+# du (OS X)
 
 > Estimate file space usage
 

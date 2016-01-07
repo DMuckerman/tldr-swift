@@ -1,4 +1,4 @@
-# shuf
+# shuf (Linux)
 
 > generate random permutations
 

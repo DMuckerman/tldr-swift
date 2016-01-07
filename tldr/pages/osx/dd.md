@@ -1,4 +1,4 @@
-# dd
+# dd (OS X)
 
 > convert and copy a file
 

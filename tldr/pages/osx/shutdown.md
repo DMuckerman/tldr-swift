@@ -1,4 +1,4 @@
-# shutdown
+# shutdown (OS X)
 
 > Shutdown and reboot the system
 

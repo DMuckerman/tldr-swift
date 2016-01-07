@@ -1,4 +1,4 @@
-# XCTool
+# XCTool (OS X)
 
 > Tool for building Xcode projects
 

@@ -1,4 +1,4 @@
-# timedatectl
+# timedatectl (Linux)
 
 > Control the system time and date
 

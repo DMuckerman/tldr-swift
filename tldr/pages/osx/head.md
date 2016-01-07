@@ -1,4 +1,4 @@
-# head
+# head (OS X)
 
 > Output the first part of files
 

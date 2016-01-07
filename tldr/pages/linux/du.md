@@ -1,4 +1,4 @@
-# du
+# du (Linux)
 
 > Estimate file space usage
 

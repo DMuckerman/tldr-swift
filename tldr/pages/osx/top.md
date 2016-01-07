@@ -1,4 +1,4 @@
-# top
+# top (OS X)
 
 > Display dynamic real-time information about running processes.
 

@@ -1,4 +1,4 @@
-# sha1sum
+# sha1sum (Linux)
 
 > Calculate SHA1 cryptographic checksums
 

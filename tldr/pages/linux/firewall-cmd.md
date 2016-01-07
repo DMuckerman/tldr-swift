@@ -1,4 +1,4 @@
-# firewall-cmd
+# firewall-cmd (Linux)
 
 > The firewalld command line client
 

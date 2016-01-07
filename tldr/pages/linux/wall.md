@@ -1,4 +1,4 @@
-# wall
+# wall (Linux)
 
 > write a message on the terminals of users currently logged in
 > only available to super-user

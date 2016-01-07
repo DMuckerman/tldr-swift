@@ -1,4 +1,4 @@
-# svcadm
+# svcadm (SunOS)
 
 > Manipulate service instances
 

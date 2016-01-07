@@ -1,4 +1,4 @@
-# dpkg
+# dpkg (Linux)
 
 > debian package manager
 

@@ -1,5 +1,4 @@
-
-# locate
+# locate (OS X)
 
 > find filenames quickly
 

@@ -1,4 +1,4 @@
-# networksetup
+# networksetup (OS X)
 
 > Configuration tool for Network System Preferences
 

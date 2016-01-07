@@ -1,4 +1,4 @@
-# xed
+# xed (OS X)
 
 > Opens files for editing in XCode
 

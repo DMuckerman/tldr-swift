@@ -1,4 +1,4 @@
-# apt-cache
+# apt-cache (Linux)
 
 > Debian and Ubuntu package query tool
 

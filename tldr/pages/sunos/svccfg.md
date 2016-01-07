@@ -1,4 +1,4 @@
-# svccfg
+# svccfg (SunOS)
 
 > Import, export, and modify service configurations
 

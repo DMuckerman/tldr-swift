@@ -1,4 +1,4 @@
-# apt-get
+# apt-get (Linux)
 
 > Debian and Ubuntu package management utility
 

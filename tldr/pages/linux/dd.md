@@ -1,4 +1,4 @@
-# dd
+# dd (Linux)
 
 > convert and copy a file
 
