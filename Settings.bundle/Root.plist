@@ -39,6 +39,38 @@
 			<false/>
 		</dict>
 		<dict>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Title</key>
+			<string>Highlight Color</string>
+			<key>Key</key>
+			<string>highlightColor</string>
+			<key>DefaultValue</key>
+			<string>#BE6369</string>
+			<key>Titles</key>
+			<array>
+				<string>Red</string>
+				<string>Orange</string>
+				<string>Yellow</string>
+				<string>Green</string>
+				<string>Cyan</string>
+				<string>Blue</string>
+				<string>Purple</string>
+				<string>Pink</string>
+			</array>
+			<key>Values</key>
+			<array>
+				<string>#BE6369</string>
+				<string>#D0886E</string>
+				<string>#ECCB86</string>
+				<string>#A5BD89</string>
+				<string>#96B5B4</string>
+				<string>#8EA1B4</string>
+				<string>#B38FAE</string>
+				<string>#AB7A65</string>
+			</array>
+		</dict>
+		<dict>
 			<key>Title</key>
 			<string>License</string>
 			<key>Type</key>
