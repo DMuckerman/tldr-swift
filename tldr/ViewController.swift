@@ -97,8 +97,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             isDarkTheme = NSUserDefaults.standardUserDefaults().valueForKey("isDarkTheme") as! Bool
         }
         
-        print(isDarkTheme)
-        
         if (isDarkTheme) {
             textInput.keyboardAppearance = UIKeyboardAppearance.Dark;
             //navBar.barStyle = UIBarStyle.Black
