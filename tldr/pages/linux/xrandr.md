@@ -1,4 +1,4 @@
-# xrandr
+# xrandr (Linux)
 
 > Set the size, orientation and/or reflection of the outputs for a screen
 

@@ -1,4 +1,4 @@
-# dnf
+# dnf (Linux)
 
 >Package management utility for RHEL, Feodra, and CentOS (replaces yum)
 

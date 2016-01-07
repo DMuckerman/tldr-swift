@@ -1,4 +1,4 @@
-# md5sum
+# md5sum (Linux)
 
 > Calculate MD5 cryptographic checksums
 

@@ -1,4 +1,4 @@
-# brew
+# brew (OS X)
 
 > Package manager for OS X
 

@@ -1,4 +1,4 @@
-# open
+# open (OS X)
 
 > Opens files, directories and applications
 

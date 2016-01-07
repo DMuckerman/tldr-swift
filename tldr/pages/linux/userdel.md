@@ -1,4 +1,4 @@
-# userdel
+# userdel (Linux)
 
 > Remove a user
 

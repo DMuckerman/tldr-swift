@@ -1,4 +1,4 @@
-# wpa_cli
+# wpa_cli (Linux)
 
 > add and configure wlan interfaces
 

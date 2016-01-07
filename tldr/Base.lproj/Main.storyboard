@@ -18,18 +18,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="k1K-6p-USA">
-                                <rect key="frame" x="0.0" y="58" width="600" height="542"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <dataDetectorType key="dataDetectorTypes"/>
-                            </webView>
                             <navigationBar clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8kT-CZ-QYU">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <textAttributes key="titleTextAttributes">
                                     <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
                                 </textAttributes>
                             </navigationBar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p6h-uU-QxU">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="p6h-uU-QxU">
                                 <rect key="frame" x="20" y="27" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
@@ -37,23 +32,44 @@
                                     <action selector="didSearch:" destination="BYZ-38-t0r" eventType="editingChanged" id="Tsn-Iz-qCG"/>
                                 </connections>
                             </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="u35-xK-w1s">
+                                <rect key="frame" x="0.0" y="65" width="600" height="536"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="3" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mOz-st-RmN">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="161"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="161" id="N7z-g9-lWX"/>
+                                        </constraints>
+                                        <sections/>
+                                    </tableView>
+                                    <webView contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="k1K-6p-USA">
+                                        <rect key="frame" x="0.0" y="161" width="600" height="375"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <dataDetectorType key="dataDetectorTypes"/>
+                                    </webView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="k1K-6p-USA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="5dz-9T-lYI"/>
-                            <constraint firstItem="k1K-6p-USA" firstAttribute="top" secondItem="p6h-uU-QxU" secondAttribute="bottom" constant="1" id="7T7-E3-6yf"/>
-                            <constraint firstItem="8kT-CZ-QYU" firstAttribute="leading" secondItem="k1K-6p-USA" secondAttribute="leading" id="Fec-JI-ogO"/>
-                            <constraint firstItem="8kT-CZ-QYU" firstAttribute="trailing" secondItem="k1K-6p-USA" secondAttribute="trailing" id="JXD-iD-V5U"/>
-                            <constraint firstItem="8kT-CZ-QYU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="WdJ-4A-cCq"/>
-                            <constraint firstItem="p6h-uU-QxU" firstAttribute="centerX" secondItem="8kT-CZ-QYU" secondAttribute="centerX" id="YuR-qe-EtC"/>
-                            <constraint firstItem="p6h-uU-QxU" firstAttribute="centerY" secondItem="8kT-CZ-QYU" secondAttribute="centerY" id="bJA-WO-eh8"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="k1K-6p-USA" secondAttribute="bottom" id="bzM-yc-yNq"/>
-                            <constraint firstItem="p6h-uU-QxU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="eQr-gg-Tms"/>
-                            <constraint firstAttribute="trailing" secondItem="8kT-CZ-QYU" secondAttribute="trailing" id="zeP-Qf-wVk"/>
+                            <constraint firstAttribute="trailing" secondItem="8kT-CZ-QYU" secondAttribute="trailing" id="4jo-Sg-XxK"/>
+                            <constraint firstItem="u35-xK-w1s" firstAttribute="leading" secondItem="8kT-CZ-QYU" secondAttribute="leading" id="52d-AB-PVZ"/>
+                            <constraint firstItem="u35-xK-w1s" firstAttribute="trailing" secondItem="8kT-CZ-QYU" secondAttribute="trailing" id="62n-TM-f6Y"/>
+                            <constraint firstItem="8kT-CZ-QYU" firstAttribute="centerX" secondItem="p6h-uU-QxU" secondAttribute="centerX" id="Iop-rC-FNC"/>
+                            <constraint firstItem="u35-xK-w1s" firstAttribute="top" secondItem="8kT-CZ-QYU" secondAttribute="bottom" constant="1" id="fZb-4K-HM1"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="u35-xK-w1s" secondAttribute="bottom" constant="-1" id="kCE-ge-l7L"/>
+                            <constraint firstItem="p6h-uU-QxU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="mGb-VH-iVs"/>
+                            <constraint firstItem="8kT-CZ-QYU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="tna-aG-cdY"/>
+                            <constraint firstItem="u35-xK-w1s" firstAttribute="top" secondItem="p6h-uU-QxU" secondAttribute="bottom" constant="8" symbolic="YES" id="tq9-VY-j4P"/>
+                            <constraint firstItem="8kT-CZ-QYU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="w2x-nP-YWT"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="markdownPage" destination="k1K-6p-USA" id="pBb-Ln-1HF"/>
+                        <outlet property="navBar" destination="8kT-CZ-QYU" id="en2-rh-a1t"/>
+                        <outlet property="tableView" destination="mOz-st-RmN" id="RsD-UM-QE0"/>
+                        <outlet property="tableViewHeight" destination="N7z-g9-lWX" id="Llj-Um-SfE"/>
                         <outlet property="textInput" destination="p6h-uU-QxU" id="mJf-GY-rgX"/>
                     </connections>
                 </viewController>

@@ -1,4 +1,4 @@
-# shutdown
+# shutdown (Linux)
 
 > Shutdown and reboot the system
 

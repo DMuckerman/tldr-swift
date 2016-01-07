@@ -1,4 +1,4 @@
-# findmnt
+# findmnt (Linux)
 
 > Find your filesystem
 

@@ -1,4 +1,4 @@
-# mdfind
+# mdfind (OS X)
 
 > List files matching a given query
 

@@ -1,4 +1,4 @@
-# useradd
+# useradd (Linux)
 
 > Create a new user
 

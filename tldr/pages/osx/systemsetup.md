@@ -1,4 +1,4 @@
-# systemsetup
+# systemsetup (OS X)
 
 > Configure System Preferences machine settings
 

@@ -1,4 +1,4 @@
-# md5
+# md5 (OS X)
 
 > Calculate MD5 cryptographic checksums
 

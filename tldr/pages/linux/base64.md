@@ -1,4 +1,4 @@
-# base64
+# base64 (Linux)
 
 > Encode or decode file or standard input, to standard output.
 

@@ -1,4 +1,4 @@
-# sha384sum
+# sha384sum (Linux)
 
 > Calculate SHA384 cryptographic checksums
 

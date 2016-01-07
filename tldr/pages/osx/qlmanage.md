@@ -1,4 +1,4 @@
-# qlmanage
+# qlmanage (OS X)
 
 > QuickLook server tool
 

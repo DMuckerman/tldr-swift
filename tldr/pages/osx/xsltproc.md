@@ -1,4 +1,4 @@
-# xsltproc
+# xsltproc (OS X)
 
 > Transform XML with XSLT to produce output (usually HTML or XML)
 

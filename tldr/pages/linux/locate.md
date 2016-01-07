@@ -1,4 +1,4 @@
-# locate
+# locate (Linux)
 
 > find filenames quickly
 

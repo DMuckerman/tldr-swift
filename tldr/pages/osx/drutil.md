@@ -1,4 +1,4 @@
-# drutil
+# drutil (OS X)
 
 > Interact with DVD burners
 

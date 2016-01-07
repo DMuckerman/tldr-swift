@@ -1,4 +1,4 @@
-# aptitude
+# aptitude (Linux)
 
 > Debian and Ubuntu package management utility
 

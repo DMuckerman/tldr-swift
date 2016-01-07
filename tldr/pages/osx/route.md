@@ -1,4 +1,4 @@
-# route
+# route (OS X)
 
 > Manually manipulate the routing tables
 > Necessitates to be root.

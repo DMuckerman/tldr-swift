@@ -1,4 +1,4 @@
-# sha256sum
+# sha256sum (Linux)
 
 > Calculate SHA256 cryptographic checksums
 

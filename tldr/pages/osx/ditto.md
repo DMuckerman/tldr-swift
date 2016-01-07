@@ -1,4 +1,4 @@
-# ditto
+# ditto (OS X)
 
 > Copy files and folders
 

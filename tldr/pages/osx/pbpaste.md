@@ -1,4 +1,4 @@
-# pbpaste
+# pbpaste (OS X)
 
 > Send the contents of the clipboard to standard output
 

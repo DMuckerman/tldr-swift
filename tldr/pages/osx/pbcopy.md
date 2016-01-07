@@ -1,4 +1,4 @@
-# pbcopy
+# pbcopy (OS X)
 
 > Place standard output in the clipboard
 

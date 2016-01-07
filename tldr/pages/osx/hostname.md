@@ -1,4 +1,4 @@
-# hostname
+# hostname (OS X)
 
 > Show or set the system's host name
 

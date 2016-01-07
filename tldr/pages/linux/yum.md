@@ -1,4 +1,4 @@
-# yum
+# yum (Linux)
 
 >Package management utility for RHEL, Feodra, and CentOS (for older versions)
 

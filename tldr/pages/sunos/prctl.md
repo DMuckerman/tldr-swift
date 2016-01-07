@@ -1,4 +1,4 @@
-# prctl
+# prctl (SunOS)
 
 > Get or set the resource controls of running processes,
 > tasks, and projects

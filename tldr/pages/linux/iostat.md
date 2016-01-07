@@ -1,4 +1,4 @@
-# iostat
+# iostat (Linux)
 
 > Report stats for devices and partitions
 

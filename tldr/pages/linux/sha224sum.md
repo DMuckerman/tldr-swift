@@ -1,4 +1,4 @@
-# sha224sum
+# sha224sum (Linux)
 
 > Calculate SHA224 cryptographic checksums
 

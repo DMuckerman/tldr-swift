@@ -1,4 +1,4 @@
-# caffeinate
+# caffeinate (OS X)
 
 > Prevent a system from sleeping
 
