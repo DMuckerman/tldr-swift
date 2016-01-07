@@ -78,7 +78,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if (NSUserDefaults.standardUserDefaults().valueForKey("defaultOS") != nil) {
             defaultOS = NSUserDefaults.standardUserDefaults().valueForKey("defaultOS") as! String
         }
-        print(defaultOS)
     }
     
     // TableView methods
@@ -210,7 +209,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             self.tableView.reloadData()
             
             // Load the tldr page
-            let path = "pages/\(result![0])/\(sender.text!)"
+            var path = ""
+            if (defaultOS == "1" && result!.contains("osx")) { // OS X
+                path = "pages/osx/\(sender.text!)"
+            } else if (defaultOS == "2" && result!.contains("linux")) { // OS X
+                path = "pages/linux/\(sender.text!)"
+            } else {
+                path = "pages/\(result![0])/\(sender.text!)"
+            }
             loadMarkdown(path)
         } else {
             // Load an empty page
