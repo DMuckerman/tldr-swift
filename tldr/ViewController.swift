@@ -30,11 +30,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var items: [String] = []
     let textCellIdentifier = "TextCell"
     var defaultOS = "0"
+    var isDarkTheme = false
     
     @IBOutlet weak var textInput: UITextField!
     @IBOutlet weak var markdownPage: UIWebView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     // Inital loading upon application launch, or reloading after killed from memory
     override func viewDidLoad() {
@@ -68,16 +70,52 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView(frame: CGRect.zero)
+        
+        // Load an empty page into the webview by default
+        markdownPage.loadHTMLString("", baseURL: nil)
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        if (isDarkTheme) {
+            return UIStatusBarStyle.LightContent
+        }
+        return UIStatusBarStyle.Default
     }
     
     
     // When the application takes focus
     func applicationActivated(notification: NSNotification) {
+        textInput.resignFirstResponder()
+        
         // Load user defaults
         // Done here so they can refresh when the user switches back
         if (NSUserDefaults.standardUserDefaults().valueForKey("defaultOS") != nil) {
             defaultOS = NSUserDefaults.standardUserDefaults().valueForKey("defaultOS") as! String
         }
+        
+        if (NSUserDefaults.standardUserDefaults().valueForKey("isDarkTheme") != nil) {
+            isDarkTheme = NSUserDefaults.standardUserDefaults().valueForKey("isDarkTheme") as! Bool
+        }
+        
+        print(isDarkTheme)
+        
+        if (isDarkTheme) {
+            textInput.keyboardAppearance = UIKeyboardAppearance.Dark;
+            navBar.barStyle = UIBarStyle.Black
+            self.view.backgroundColor = UIColor.blackColor()
+            UIApplication.sharedApplication().statusBarStyle = .LightContent
+            self.setNeedsStatusBarAppearanceUpdate()
+            self.view.setNeedsDisplay()
+        } else {
+            textInput.keyboardAppearance = UIKeyboardAppearance.Light;
+            navBar.barStyle = UIBarStyle.Default
+            self.view.backgroundColor = UIColor ( red: 0.9765, green: 0.9765, blue: 0.9765, alpha: 1.0 )
+            UIApplication.sharedApplication().statusBarStyle = .Default
+            self.setNeedsStatusBarAppearanceUpdate()
+            self.view.setNeedsDisplay()
+        }
+        
+        textInput.becomeFirstResponder()
     }
     
     // TableView methods
