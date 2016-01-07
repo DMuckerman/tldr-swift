@@ -101,15 +101,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if (isDarkTheme) {
             textInput.keyboardAppearance = UIKeyboardAppearance.Dark;
-            navBar.barStyle = UIBarStyle.Black
-            self.view.backgroundColor = UIColor.blackColor()
+            //navBar.barStyle = UIBarStyle.Black
+            navBar.barTintColor = UIColor ( red: 0.349, green: 0.349, blue: 0.349, alpha: 1.0 )
+            self.view.backgroundColor = UIColor ( red: 0.3882, green: 0.3882, blue: 0.3882, alpha: 1.0 )
             UIApplication.sharedApplication().statusBarStyle = .LightContent
+            textInput.backgroundColor = UIColor ( red: 0.5412, green: 0.5412, blue: 0.5412, alpha: 1.0 )
+            textInput.textColor = UIColor.whiteColor()
+            navBar.tintColorDidChange()
             self.setNeedsStatusBarAppearanceUpdate()
             self.view.setNeedsDisplay()
         } else {
             textInput.keyboardAppearance = UIKeyboardAppearance.Light;
-            navBar.barStyle = UIBarStyle.Default
+            //navBar.barStyle = UIBarStyle.Default
+            navBar.barTintColor = UIColor ( red: 0.9765, green: 0.9765, blue: 0.9765, alpha: 1.0 )
             self.view.backgroundColor = UIColor ( red: 0.9765, green: 0.9765, blue: 0.9765, alpha: 1.0 )
+            textInput.backgroundColor = UIColor.whiteColor()
+            textInput.textColor = UIColor.blackColor()
             UIApplication.sharedApplication().statusBarStyle = .Default
             self.setNeedsStatusBarAppearanceUpdate()
             self.view.setNeedsDisplay()
