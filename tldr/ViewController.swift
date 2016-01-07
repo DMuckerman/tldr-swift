@@ -29,15 +29,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var commands: [String: [JSON]] = [:]
     var items: [String] = []
     let textCellIdentifier = "TextCell"
-
+    var defaultOS = "0"
+    
     @IBOutlet weak var textInput: UITextField!
     @IBOutlet weak var markdownPage: UIWebView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
+    // Inital loading upon application launch, or reloading after killed from memory
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // Parse json file into commands dictionary
         if let path = NSBundle.mainBundle().pathForResource("pages/index", ofType: "json") {
             do {
                 let data = try NSData(contentsOfURL: NSURL(fileURLWithPath: path), options: NSDataReadingOptions.DataReadingMappedIfSafe)
@@ -60,14 +63,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print("Invalid filename/path.")
         }
         
+        // Register platforms tableview
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "TextCell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView(frame: CGRect.zero)
-        
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
+    
+    // When the application takes focus
+    func applicationActivated(notification: NSNotification) {
+        // Load user defaults
+        // Done here so they can refresh when the user switches back
+        if (NSUserDefaults.standardUserDefaults().valueForKey("defaultOS") != nil) {
+            defaultOS = NSUserDefaults.standardUserDefaults().valueForKey("defaultOS") as! String
+        }
+        print(defaultOS)
+    }
+    
+    // TableView methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -96,8 +110,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         textInput.endEditing(true)
         
         let row = indexPath.row
-        var markdown = Markdown()
         let path = "pages/\(items[row])/\(textInput.text!)"
+        loadMarkdown(path)
+    }
+    
+    // Load the markdown page based on the given path
+    func loadMarkdown(path: String) {
+        // Create Markingbird object
+        var markdown = Markdown()
+        
         if let path = NSBundle.mainBundle().pathForResource(path, ofType: "md") {
             do {
                 let text2 = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
@@ -111,32 +132,39 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    // Load notifications on view's appearance
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        self.registerForKeyboardNotifications()
+        self.registerForNotifications()
     }
     
+    // Unload notifications on view's disappearance
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(true)
-        self.deregisterFromKeyboardNotifications()
+        self.deregisterFromNotifications()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func registerForKeyboardNotifications ()-> Void   {
+    // Register for notifications
+    func registerForNotifications ()-> Void   {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWasShown:", name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillBeHidden:", name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationActivated:", name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
     
-    func deregisterFromKeyboardNotifications () -> Void {
+    // Deregister for notifications
+    func deregisterFromNotifications () -> Void {
         let center:  NSNotificationCenter = NSNotificationCenter.defaultCenter()
         center.removeObserver(self, name: UIKeyboardDidHideNotification, object: nil)
         center.removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+        center.removeObserver(self, name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
     
+    // Selector for keyboard shown notification
     func keyboardWasShown (notification: NSNotification) {
         let info : NSDictionary = notification.userInfo!
         let keyboardSize = info.objectForKey(UIKeyboardFrameBeginUserInfoKey)?.CGRectValue
@@ -148,6 +176,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.hidden = false
     }
     
+    // Selector for keyboard hidden notification
     func keyboardWillBeHidden (notification: NSNotification) {
         let insets: UIEdgeInsets = UIEdgeInsetsMake(markdownPage.scrollView.contentInset.top, 0, 0, 0)
         
@@ -155,37 +184,42 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         markdownPage.scrollView.scrollIndicatorInsets = insets
         tableView.hidden = true
     }
-
+    
+    // Every time the search textfield updates
     @IBAction func didSearch(sender: UITextField) {
+        // Fix markdown page offset
         markdownPage.scrollView.contentOffset = CGPoint(x: 0, y: 0)
-        var markdown = Markdown()
+        
+        // Get the platforms for the current command
         var result = commands[sender.text!]
-        if (result != nil) {
+        if (result != nil) { // If the platforms list isn't nil
+            // Empty the platforms tableview
             items.removeAll()
-            if (result!.count > 1) {
+            
+            // Fill in the tableview with the platforms from the result
+            if (result!.count > 1) { // Only if there's more than 1 result
                 tableView.hidden = false
                 for item in result! {
                     items.append(item.string!)
                 }
-            } else {
+            } else { // If there's only 1 result, hide the tableview
                 tableView.hidden = true
             }
+            
+            // Reload the tableview
             self.tableView.reloadData()
+            
+            // Load the tldr page
             let path = "pages/\(result![0])/\(sender.text!)"
-            if let path = NSBundle.mainBundle().pathForResource(path, ofType: "md") {
-                do {
-                    let text2 = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
-                    let styled = "<head>\n\t<style>\n\tbody {\n\t\tfont-size: 1.05em !important;\n\t\tmargin-top: 0.5em !important; }\n\t\n\tp {\n\t\tmargin: 0 !important; }\n\th1 {\n\t\tfont-size: 2em !important;\n\t\tmargin: 0 0.23em; }\n\t\n\tblockquote {\n\t\tmargin: 0 0.55em; }\n\t\n\tcode {\n\t\tfont-family: \"Source Code Pro\", courier new, courier;\n\t\tbackground-color: #f2f2f2;\n\t\tcolor: #212121;\n\t\tdisplay: block;\n\t\tfont-size: 0.9em !important;\n\t\tpadding: 0.55em 1.25em;\n\t\tmargin: 0; }\n\t\n\tul {\n\t\tlist-style: none;\n\t\tpadding: 0 !important;\n\t\tmargin: 1em 0 0 0; }\n\t\n\tul li {\n\t\tpadding: 0.5em 0.55em;\n\t\tline-height: 1.1; }\n\t@media only screen and (orientation: landscape) {\n\t\tbody {\n\t\t\tmargin-top: 5em; } }\n\t@media only screen and (min-device-width: 1024px) {\n\t\tbody {\n\t\t\tfont-size: 1em;\n\t\t\tmargin-top: 3em; }\n\t\tcode {\n\t\t\tpadding-left: 3em; }\n\t\tul {\n\t\t\tmargin-top: 1em; }\n\t\tage ul li:before {\n\t\t\tcontent: \"*\";\n\t\t\tpadding: 0 12px; } }\n\t</style>\n</head>\n<body>" + markdown.transform(text2 as String) + "</body>"
-                    markdownPage.loadHTMLString(styled, baseURL: nil)
-                } catch let error as NSError {
-                    print(error.localizedDescription)
-                }
-            } else {
-                print("Invalid filename/path.")
-            }
+            loadMarkdown(path)
         } else {
+            // Load an empty page
             markdownPage.loadHTMLString("", baseURL: nil)
+            
+            // Make sure the platforms list is empty
             items.removeAll()
+            
+            // Update the tableview
             self.tableView.reloadData()
         }
     }
