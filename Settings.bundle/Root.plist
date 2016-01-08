@@ -30,13 +30,9 @@
 		</dict>
 		<dict>
 			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
+			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Dark Theme</string>
-			<key>Key</key>
-			<string>isDarkTheme</string>
-			<key>DefaultValue</key>
-			<false/>
+			<string>Theme</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -46,7 +42,7 @@
 			<key>Key</key>
 			<string>highlightColor</string>
 			<key>DefaultValue</key>
-			<string>#BE6369</string>
+			<string>#DB3929</string>
 			<key>Titles</key>
 			<array>
 				<string>Red</string>
@@ -60,15 +56,25 @@
 			</array>
 			<key>Values</key>
 			<array>
-				<string>#BE6369</string>
-				<string>#D0886E</string>
-				<string>#ECCB86</string>
-				<string>#A5BD89</string>
-				<string>#96B5B4</string>
-				<string>#8EA1B4</string>
-				<string>#B38FAE</string>
-				<string>#AB7A65</string>
+				<string>#DB3929</string>
+				<string>#CB4E02</string>
+				<string>#A97F00</string>
+				<string>#879800</string>
+				<string>#2EA098</string>
+				<string>#1A8BD5</string>
+				<string>#6872C7</string>
+				<string>#D23D83</string>
 			</array>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Dark Theme</string>
+			<key>Key</key>
+			<string>isDarkTheme</string>
+			<key>DefaultValue</key>
+			<false/>
 		</dict>
 		<dict>
 			<key>Title</key>
