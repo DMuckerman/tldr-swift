@@ -99,7 +99,16 @@ class ViewController: UIViewController {
     
     // When the application takes focus
     func applicationActivated(notification: NSNotification) {
-        textInput.resignFirstResponder()
+        // Default to keyboard hidden
+        var keyboardShown = false
+        
+        if (textInput.isFirstResponder()) { // If keyboard is shown
+            keyboardShown = true
+        }
+        
+        if (keyboardShown) {
+            textInput.resignFirstResponder()
+        }
         
         // Load user defaults
         // Done here so they can refresh when the user switches back
@@ -138,7 +147,9 @@ class ViewController: UIViewController {
             loadPage(commands[textInput.text!], text: textInput.text!)
         }
         
-        textInput.becomeFirstResponder()
+        if (keyboardShown) {
+            textInput.becomeFirstResponder()
+        }
     }
     
     // Load the markdown page based on the given path
