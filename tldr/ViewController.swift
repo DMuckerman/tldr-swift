@@ -25,11 +25,11 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController {
     var commands: [String: [JSON]] = [:]
     var items: [String] = []
     let textCellIdentifier = "TextCell"
-    var defaultOS = "0"
+    var defaultOS = "1"
     var isDarkTheme = false
     var highlightColor = "#DB3929"
     
@@ -55,9 +55,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var textInput: UITextField!
     @IBOutlet weak var markdownPage: UIWebView!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var navBar: UINavigationBar!
+    @IBOutlet weak var stackView: UIStackView!
     
     // Inital loading upon application launch, or reloading after killed from memory
     override func viewDidLoad() {
@@ -85,12 +84,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else {
             print("Invalid filename/path.")
         }
-        
-        // Register platforms tableview
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "TextCell")
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         // Load an empty page into the webview by default
         markdownPage.loadHTMLString("", baseURL: nil)
@@ -124,7 +117,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if (isDarkTheme) {
             textInput.keyboardAppearance = UIKeyboardAppearance.Dark;
-            //navBar.barStyle = UIBarStyle.Black
+            markdownPage.backgroundColor = UIColor ( red: 0.0, green: 0.1686, blue: 0.2196, alpha: 1.0 )
             navBar.barTintColor = UIColor ( red: 0.349, green: 0.349, blue: 0.349, alpha: 1.0 )
             self.view.backgroundColor = UIColor ( red: 0.3882, green: 0.3882, blue: 0.3882, alpha: 1.0 )
             textInput.backgroundColor = UIColor ( red: 0.5412, green: 0.5412, blue: 0.5412, alpha: 1.0 )
@@ -133,10 +126,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             navBar.tintColorDidChange()
             self.setNeedsStatusBarAppearanceUpdate()
             loadPage(commands[textInput.text!], text: textInput.text!)
-            self.tableView.reloadData()
         } else {
             textInput.keyboardAppearance = UIKeyboardAppearance.Light;
-            //navBar.barStyle = UIBarStyle.Default
+            markdownPage.backgroundColor = UIColor ( red: 0.9922, green: 0.9647, blue: 0.8824, alpha: 1.0 )
             navBar.barTintColor = UIColor ( red: 0.9765, green: 0.9765, blue: 0.9765, alpha: 1.0 )
             self.view.backgroundColor = UIColor ( red: 0.9765, green: 0.9765, blue: 0.9765, alpha: 1.0 )
             textInput.backgroundColor = UIColor.whiteColor()
@@ -144,51 +136,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             UIApplication.sharedApplication().statusBarStyle = .Default
             self.setNeedsStatusBarAppearanceUpdate()
             loadPage(commands[textInput.text!], text: textInput.text!)
-            self.tableView.reloadData()
         }
         
         textInput.becomeFirstResponder()
-    }
-    
-    // TableView methods
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as UITableViewCell
-        
-        let row = indexPath.row
-        cell.textLabel?.text = items[row]
-        
-        if (isDarkTheme) {
-            cell.backgroundColor = UIColor ( red: 0.3882, green: 0.3882, blue: 0.3882, alpha: 1.0 )
-            cell.textLabel?.textColor = UIColor.whiteColor()
-        } else {
-            cell.backgroundColor = UIColor ( red: 0.9765, green: 0.9765, blue: 0.9765, alpha: 1.0 )
-            cell.textLabel?.textColor = UIColor.blackColor()
-        }
-        
-        var frame = tableView.frame
-        frame.size.height = tableView.contentSize.height
-        tableView.frame = frame
-        tableViewHeight.constant = tableView.frame.size.height
-        
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
-        textInput.endEditing(true)
-        
-        let row = indexPath.row
-        let path = "pages/\(items[row])/\(textInput.text!)"
-        loadMarkdown(path)
     }
     
     // Load the markdown page based on the given path
@@ -218,7 +168,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.registerForNotifications()
-        tableView.hidden = true
+        //tableView.hidden = true
     }
     
     // Unload notifications on view's disappearance
@@ -234,7 +184,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Register for notifications
     func registerForNotifications ()-> Void   {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWasShown:", name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWasShown:", name: UIKeyboardDidChangeFrameNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillBeHidden:", name: UIKeyboardWillHideNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "applicationActivated:", name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
@@ -242,6 +193,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // Deregister for notifications
     func deregisterFromNotifications () -> Void {
         let center:  NSNotificationCenter = NSNotificationCenter.defaultCenter()
+        center.removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        center.removeObserver(self, name: UIKeyboardDidChangeFrameNotification, object: nil)
         center.removeObserver(self, name: UIKeyboardDidHideNotification, object: nil)
         center.removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
         center.removeObserver(self, name: UIApplicationDidBecomeActiveNotification, object: nil)
@@ -249,16 +202,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Selector for keyboard shown notification
     func keyboardWasShown (notification: NSNotification) {
-        let info : NSDictionary = notification.userInfo!
-        let keyboardSize = info.objectForKey(UIKeyboardFrameBeginUserInfoKey)?.CGRectValue
-        
-        let insets: UIEdgeInsets = UIEdgeInsetsMake(markdownPage.scrollView.contentInset.top, 0, keyboardSize!.height, 0)
-        
-        markdownPage.scrollView.contentInset = insets
-        markdownPage.scrollView.scrollIndicatorInsets = insets
-        
-        if (items.count > 1) {
-            tableView.hidden = false
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() {
+            // Adjust keyboard size properly
+            let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: (UIScreen.mainScreen().bounds.height - keyboardSize.origin.y)
+                , right: 0)
+            
+            markdownPage.scrollView.contentInset = contentInsets
+            markdownPage.scrollView.scrollIndicatorInsets = contentInsets
+        }
+    }
+    
+    // Selector for keyboard shown notification
+    func keyboardWillShow (notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.size.height, right: 0)
+            
+            markdownPage.scrollView.contentInset = contentInsets
+            markdownPage.scrollView.scrollIndicatorInsets = contentInsets
         }
     }
     
@@ -268,8 +228,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         markdownPage.scrollView.contentInset = insets
         markdownPage.scrollView.scrollIndicatorInsets = insets
-        
-        tableView.hidden = true
     }
     
     // Every time the search textfield updates
@@ -287,24 +245,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             // Empty the platforms tableview
             items.removeAll()
             
-            // Fill in the tableview with the platforms from the result
-            if (result!.count > 1) { // Only if there's more than 1 result
-                tableView.hidden = false
-                for item in result! {
-                    items.append(item.string!)
-                }
-            } else { // If there's only 1 result, hide the tableview
-                tableView.hidden = true
-            }
-            
-            // Reload the tableview
-            self.tableView.reloadData()
-            
             // Load the tldr page
             var path = ""
             if (defaultOS == "1" && result!.contains("osx")) { // OS X
                 path = "pages/osx/\(text)"
-            } else if (defaultOS == "2" && result!.contains("linux")) { // OS X
+            } else if (defaultOS == "2" && result!.contains("linux")) { // Linux
                 path = "pages/linux/\(text)"
             } else {
                 path = "pages/\(result![0])/\(text)"
@@ -313,22 +258,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else {
             // Load an empty page
             if(isDarkTheme) {
-                tableView.backgroundColor = UIColor ( red: 0.1686, green: 0.1882, blue: 0.2314, alpha: 1.0 )
                 markdownPage.backgroundColor = UIColor.clearColor()
                 markdownPage.loadHTMLString("<head>\n\t<style>\n\tbody {\n\t\tfont-size: 1.05em !important;\n\t\tmargin-top: 0.5em !important;\n\t\tbackground-color: " + darkBackground + " !important;\n\t\tcolor: #C0C5CE !important;\n\t\tfont-family: -apple-system, Helvetica, Arial, sans-serif;}\n\t</style>\n</head>\n<body>\n</body>", baseURL: nil)
             } else {
-                tableView.backgroundColor = UIColor ( red: 0.9373, green: 0.9451, blue: 0.9608, alpha: 1.0 )
                 markdownPage.backgroundColor = UIColor.clearColor()
                 markdownPage.loadHTMLString("<head>\n\t<style>\n\tbody {\n\t\tfont-size: 1.05em !important;\n\t\tmargin-top: 0.5em !important;\n\t\tbackground-color: " + lightBackground + " !important;\n\t\tcolor: #4F5B67 !important;\n\t\tfont-family: -apple-system, Helvetica, Arial, sans-serif;}\n\t</style>\n</head>\n<body>\n</body>", baseURL: nil)
             }
             
             // Make sure the platforms list is empty
             items.removeAll()
-            
-            tableView.hidden = true
-            
-            // Update the tableview
-            self.tableView.reloadData()
         }
     }
     
