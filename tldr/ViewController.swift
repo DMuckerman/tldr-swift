@@ -269,10 +269,10 @@ class ViewController: UIViewController {
         } else {
             // Load an empty page
             if(isDarkTheme) {
-                markdownPage.backgroundColor = UIColor.clearColor()
+                markdownPage.backgroundColor = UIColor ( red: 0.0, green: 0.1686, blue: 0.2196, alpha: 1.0 )
                 markdownPage.loadHTMLString("<head>\n\t<style>\n\tbody {\n\t\tfont-size: 1.05em !important;\n\t\tmargin-top: 0.5em !important;\n\t\tbackground-color: " + darkBackground + " !important;\n\t\tcolor: #C0C5CE !important;\n\t\tfont-family: -apple-system, Helvetica, Arial, sans-serif;}\n\t</style>\n</head>\n<body>\n</body>", baseURL: nil)
             } else {
-                markdownPage.backgroundColor = UIColor.clearColor()
+                markdownPage.backgroundColor = UIColor ( red: 0.9922, green: 0.9647, blue: 0.8824, alpha: 1.0 )
                 markdownPage.loadHTMLString("<head>\n\t<style>\n\tbody {\n\t\tfont-size: 1.05em !important;\n\t\tmargin-top: 0.5em !important;\n\t\tbackground-color: " + lightBackground + " !important;\n\t\tcolor: #4F5B67 !important;\n\t\tfont-family: -apple-system, Helvetica, Arial, sans-serif;}\n\t</style>\n</head>\n<body>\n</body>", baseURL: nil)
             }
             
