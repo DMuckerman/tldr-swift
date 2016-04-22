@@ -12,6 +12,7 @@
 		9E68FEE91C3A4312008B432F /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 9E68FEE81C3A4312008B432F /* LICENSE */; };
 		9E8F83691C3B4ED4004A3492 /* Markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8F83671C3B4ED4004A3492 /* Markdown.swift */; };
 		9E8F836A1C3B4ED4004A3492 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8F83681C3B4ED4004A3492 /* SwiftyJSON.swift */; };
+		9EB4071F1CC901FB005407BE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB4071E1CC901FB005407BE /* SettingsViewController.swift */; };
 		9EFD4E961C3A08FF00D67927 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFD4E951C3A08FF00D67927 /* AppDelegate.swift */; };
 		9EFD4E981C3A08FF00D67927 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFD4E971C3A08FF00D67927 /* ViewController.swift */; };
 		9EFD4E9B1C3A08FF00D67927 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EFD4E991C3A08FF00D67927 /* Main.storyboard */; };
@@ -46,6 +47,7 @@
 		9E68FEE81C3A4312008B432F /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		9E8F83671C3B4ED4004A3492 /* Markdown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Markdown.swift; sourceTree = "<group>"; };
 		9E8F83681C3B4ED4004A3492 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		9EB4071E1CC901FB005407BE /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = ../SettingsViewController.swift; sourceTree = "<group>"; };
 		9EFD4E921C3A08FF00D67927 /* tldr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tldr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EFD4E951C3A08FF00D67927 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EFD4E971C3A08FF00D67927 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = tldr/ViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -118,6 +120,7 @@
 				9E8F83681C3B4ED4004A3492 /* SwiftyJSON.swift */,
 				9EFD4E951C3A08FF00D67927 /* AppDelegate.swift */,
 				9EFD4E971C3A08FF00D67927 /* ViewController.swift */,
+				9EB4071E1CC901FB005407BE /* SettingsViewController.swift */,
 				9EFD4E991C3A08FF00D67927 /* Main.storyboard */,
 				9EFD4E9C1C3A08FF00D67927 /* Assets.xcassets */,
 				9EFD4E9E1C3A08FF00D67927 /* LaunchScreen.storyboard */,
@@ -301,6 +304,7 @@
 				9E8F83691C3B4ED4004A3492 /* Markdown.swift in Sources */,
 				9EFD4E981C3A08FF00D67927 /* ViewController.swift in Sources */,
 				9E8F836A1C3B4ED4004A3492 /* SwiftyJSON.swift in Sources */,
+				9EB4071F1CC901FB005407BE /* SettingsViewController.swift in Sources */,
 				9EFD4E961C3A08FF00D67927 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

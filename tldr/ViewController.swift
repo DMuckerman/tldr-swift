@@ -110,6 +110,14 @@ class ViewController: UIViewController {
             textInput.resignFirstResponder()
         }
         
+        applyTheme()
+        
+        if (keyboardShown) {
+            textInput.becomeFirstResponder()
+        }
+    }
+    
+    func applyTheme() {
         // Load user defaults
         // Done here so they can refresh when the user switches back
         if (NSUserDefaults.standardUserDefaults().valueForKey("defaultOS") != nil) {
@@ -117,7 +125,7 @@ class ViewController: UIViewController {
         }
         
         if (NSUserDefaults.standardUserDefaults().valueForKey("isDarkTheme") != nil) {
-            isDarkTheme = NSUserDefaults.standardUserDefaults().valueForKey("isDarkTheme") as! Bool
+            isDarkTheme = NSUserDefaults.standardUserDefaults().boolForKey("isDarkTheme")
         }
         
         if (NSUserDefaults.standardUserDefaults().valueForKey("highlightColor") != nil) {
@@ -145,10 +153,6 @@ class ViewController: UIViewController {
             UIApplication.sharedApplication().statusBarStyle = .Default
             self.setNeedsStatusBarAppearanceUpdate()
             loadPage(commands[textInput.text!], text: textInput.text!)
-        }
-        
-        if (keyboardShown) {
-            textInput.becomeFirstResponder()
         }
     }
     
@@ -179,6 +183,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.registerForNotifications()
+        applyTheme()
         //tableView.hidden = true
     }
     
