@@ -57,6 +57,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var markdownPage: UIWebView!
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var settingsButton: UIButton!
     
     // Inital loading upon application launch, or reloading after killed from memory
     override func viewDidLoad() {
@@ -132,12 +133,22 @@ class ViewController: UIViewController {
             highlightColor = NSUserDefaults.standardUserDefaults().valueForKey("highlightColor") as! String
         }
         
+        let clearButton = textInput.valueForKey("clearButton") as! UIButton
+        clearButton.setImage(clearButton.imageView?.image?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), forState: .Normal)
+        if (isDarkTheme) {
+            clearButton.tintColor = UIColor.whiteColor()
+        } else {
+            clearButton.tintColor = UIColor.blackColor()
+        }
+        
         if (isDarkTheme) {
             textInput.keyboardAppearance = UIKeyboardAppearance.Dark;
             markdownPage.backgroundColor = UIColor ( red: 0.0, green: 0.1686, blue: 0.2196, alpha: 1.0 )
-            navBar.barTintColor = UIColor ( red: 0.349, green: 0.349, blue: 0.349, alpha: 1.0 )
-            self.view.backgroundColor = UIColor ( red: 0.3882, green: 0.3882, blue: 0.3882, alpha: 1.0 )
-            textInput.backgroundColor = UIColor ( red: 0.5412, green: 0.5412, blue: 0.5412, alpha: 1.0 )
+            navBar.barTintColor = UIColor(red:0.17, green:0.24, blue:0.30, alpha:1.00)
+            navBar.tintColor = UIColor(red:0.60, green:0.76, blue:0.83, alpha:1.00)
+            settingsButton.tintColor = UIColor(red:0.60, green:0.76, blue:0.83, alpha:1.00)
+            self.view.backgroundColor = UIColor(red:0.17, green:0.24, blue:0.30, alpha:1.00)
+            textInput.backgroundColor = UIColor(red:0.03, green:0.08, blue:0.13, alpha:1.00)
             textInput.textColor = UIColor.whiteColor()
             UIApplication.sharedApplication().statusBarStyle = .LightContent
             navBar.tintColorDidChange()
@@ -147,6 +158,8 @@ class ViewController: UIViewController {
             textInput.keyboardAppearance = UIKeyboardAppearance.Light;
             markdownPage.backgroundColor = UIColor ( red: 0.9922, green: 0.9647, blue: 0.8824, alpha: 1.0 )
             navBar.barTintColor = UIColor ( red: 0.9765, green: 0.9765, blue: 0.9765, alpha: 1.0 )
+            navBar.tintColor = UIColor(red:0.00, green:0.48, blue:1.00, alpha:1.00)
+            settingsButton.tintColor = UIColor(red:0.00, green:0.48, blue:1.00, alpha:1.00)
             self.view.backgroundColor = UIColor ( red: 0.9765, green: 0.9765, blue: 0.9765, alpha: 1.0 )
             textInput.backgroundColor = UIColor.whiteColor()
             textInput.textColor = UIColor.blackColor()
@@ -204,6 +217,7 @@ class ViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.keyboardWasShown(_:)), name: UIKeyboardDidChangeFrameNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.keyboardWillBeHidden(_:)), name: UIKeyboardWillHideNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.applicationActivated(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(applyTheme), name: "DidChangeThemeColor", object: nil)
     }
     
     // Deregister for notifications
@@ -214,6 +228,7 @@ class ViewController: UIViewController {
         center.removeObserver(self, name: UIKeyboardDidHideNotification, object: nil)
         center.removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
         center.removeObserver(self, name: UIApplicationDidBecomeActiveNotification, object: nil)
+        center.removeObserver(self, name: "DidChangeThemeColor", object: nil)
     }
     
     // Selector for keyboard shown notification

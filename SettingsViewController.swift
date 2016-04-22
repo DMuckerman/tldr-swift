@@ -39,6 +39,8 @@ class SettingsViewController: UITableViewController {
             // Load Highlight Color
             highlightColor = defaults.objectForKey("highlightColor") as! String
         }
+        
+        applyTheme()
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,6 +56,20 @@ class SettingsViewController: UITableViewController {
         let cell = super.tableView(tableView, cellForRowAtIndexPath: indexPath)
         
         //cell.accessoryType = UITableViewCellAccessoryType.None
+        
+        if (isDarkTheme) {
+            cell.backgroundColor = UIColor(red:0.09, green:0.13, blue:0.16, alpha:1.00)
+            cell.textLabel?.textColor = UIColor.whiteColor()
+            /*cell.tintColor = UIColor(red:0.72, green:0.75, blue:0.78, alpha:1.00)
+            cell.textLabel?.textColor = UIColor.whiteColor()
+            cell.detailTextLabel?.textColor = UIColor(red:0.50, green:0.53, blue:0.56, alpha:1.00)*/
+        } else {
+            cell.backgroundColor = UIColor.whiteColor()
+            cell.textLabel?.textColor = UIColor.blackColor()
+            /*cell.tintColor = UIColor(red:0.78, green:0.78, blue:0.80, alpha:1.00)
+            cell.textLabel?.textColor = UIColor.blackColor()
+            cell.detailTextLabel?.textColor = UIColor(red:0.56, green:0.56, blue:0.58, alpha:1.00)*/
+        }
         
         let section = indexPath.section
         let row = indexPath.row
@@ -83,6 +99,7 @@ class SettingsViewController: UITableViewController {
                 let switchView = UISwitch.init(frame: CGRect.zero)
                 switchView.on = isDarkTheme
                 switchView.addTarget(self, action: #selector(updateSwitchAtIndexPath), forControlEvents: UIControlEvents.TouchUpInside)
+                switchView.onTintColor = UIColor(red:0.60, green:0.76, blue:0.83, alpha:1.00)
                 cell.accessoryView = switchView
             }
         default: break
@@ -96,6 +113,33 @@ class SettingsViewController: UITableViewController {
         
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setBool(sender.on, forKey: "isDarkTheme")
+        isDarkTheme = sender.on
+        applyTheme()
+        self.tableView.reloadData()
+        NSNotificationCenter.defaultCenter().postNotificationName("DidChangeThemeColor", object: nil)
+    }
+    
+    func applyTheme() {
+        if (isDarkTheme) {
+            self.navigationController?.navigationBar.barTintColor = UIColor(red:0.17, green:0.24, blue:0.30, alpha:1.00)
+            self.navigationController?.navigationBar.tintColor = UIColor(red:0.60, green:0.76, blue:0.83, alpha:1.00)
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+            self.navigationController?.navigationBar.tintColorDidChange()
+            UIApplication.sharedApplication().statusBarStyle = .LightContent
+            self.parentViewController?.setNeedsStatusBarAppearanceUpdate()
+            self.tableView.backgroundColor = UIColor(red:0.11, green:0.16, blue:0.20, alpha:1.00)
+            self.tableView.separatorColor = UIColor(red:0.12, green:0.17, blue:0.20, alpha:1.00)
+        } else {
+            self.navigationController?.navigationBar.barTintColor = UIColor ( red: 0.9765, green: 0.9765, blue: 0.9765, alpha: 1.0 )
+            self.navigationController?.navigationBar.tintColor = UIColor(red:0.00, green:0.48, blue:1.00, alpha:1.00)
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.blackColor()]
+            self.navigationController?.navigationBar.tintColorDidChange()
+            UIApplication.sharedApplication().statusBarStyle = .Default
+            self.parentViewController?.setNeedsStatusBarAppearanceUpdate()
+            self.tableView.backgroundColor = UIColor(red:0.94, green:0.94, blue:0.96, alpha:1.00)
+            self.tableView.tableHeaderView?.tintColor = UIColor(red:0.43, green:0.43, blue:0.45, alpha:1.00)
+            self.tableView.separatorColor = UIColor(red:0.78, green:0.78, blue:0.80, alpha:1.00)
+        }
     }
     
     // MARK: - Table view data source
