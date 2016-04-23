@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E20B7931CCAF5B300CF53FE /* SettingsOSTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E20B7921CCAF5B300CF53FE /* SettingsOSTableViewController.swift */; };
 		9E2221D91C3B52E500316FAE /* licenses in Resources */ = {isa = PBXBuildFile; fileRef = 9E2221D81C3B52E500316FAE /* licenses */; };
 		9E2221DC1C3B586D00316FAE /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9E2221DB1C3B586D00316FAE /* Settings.bundle */; };
 		9E68FEE91C3A4312008B432F /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 9E68FEE81C3A4312008B432F /* LICENSE */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9E20B7921CCAF5B300CF53FE /* SettingsOSTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsOSTableViewController.swift; path = ../SettingsOSTableViewController.swift; sourceTree = "<group>"; };
 		9E2221D81C3B52E500316FAE /* licenses */ = {isa = PBXFileReference; lastKnownFileType = folder; path = licenses; sourceTree = "<group>"; };
 		9E2221DB1C3B586D00316FAE /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		9E68FEE61C3A3F47008B432F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				9EFD4E951C3A08FF00D67927 /* AppDelegate.swift */,
 				9EFD4E971C3A08FF00D67927 /* ViewController.swift */,
 				9EB4071E1CC901FB005407BE /* SettingsViewController.swift */,
+				9E20B7921CCAF5B300CF53FE /* SettingsOSTableViewController.swift */,
 				9EFD4E991C3A08FF00D67927 /* Main.storyboard */,
 				9EFD4E9C1C3A08FF00D67927 /* Assets.xcassets */,
 				9EFD4E9E1C3A08FF00D67927 /* LaunchScreen.storyboard */,
@@ -303,6 +306,7 @@
 			files = (
 				9E8F83691C3B4ED4004A3492 /* Markdown.swift in Sources */,
 				9EFD4E981C3A08FF00D67927 /* ViewController.swift in Sources */,
+				9E20B7931CCAF5B300CF53FE /* SettingsOSTableViewController.swift in Sources */,
 				9E8F836A1C3B4ED4004A3492 /* SwiftyJSON.swift in Sources */,
 				9EB4071F1CC901FB005407BE /* SettingsViewController.swift in Sources */,
 				9EFD4E961C3A08FF00D67927 /* AppDelegate.swift in Sources */,

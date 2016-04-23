@@ -42,6 +42,27 @@ class SettingsViewController: UITableViewController {
         
         applyTheme()
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if (defaults.objectForKey("isDarkTheme") != nil) {
+            // Load Dark Theme!
+            isDarkTheme = defaults.boolForKey("isDarkTheme")
+        }
+        
+        if (defaults.objectForKey("defaultOS") != nil) {
+            // Load Default OS
+            defaultOS = defaults.objectForKey("defaultOS") as! String
+        }
+        
+        if (defaults.objectForKey("highlightColor") != nil) {
+            // Load Highlight Color
+            highlightColor = defaults.objectForKey("highlightColor") as! String
+        }
+        
+        self.tableView.reloadData()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -106,6 +127,15 @@ class SettingsViewController: UITableViewController {
         }
         
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        if (indexPath.section == 2) {
+            let url : NSURL = NSURL.init(string: UIApplicationOpenSettingsURLString)!
+            UIApplication.sharedApplication().openURL(url)
+        }
     }
     
     func updateSwitchAtIndexPath(sender: UISwitch) {
