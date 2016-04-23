@@ -8,10 +8,10 @@
 
 import UIKit
 
-class SettingsOSViewController: UITableViewController {
+class SettingsColorViewController: UITableViewController {
     
-    var defaultOS = "1"
     var isDarkTheme = false
+    var highlightColor = "#DB3929"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +29,9 @@ class SettingsOSViewController: UITableViewController {
             isDarkTheme = defaults.boolForKey("isDarkTheme")
         }
         
-        if (defaults.objectForKey("defaultOS") != nil) {
-            // Load Default OS
-            defaultOS = defaults.objectForKey("defaultOS") as! String
+        if (defaults.objectForKey("highlightColor") != nil) {
+            // Load Highlight color
+            highlightColor = defaults.objectForKey("highlightColor") as! String
         }
         
         applyTheme()
@@ -62,8 +62,22 @@ class SettingsOSViewController: UITableViewController {
         
         switch section {
         case 0:
-            if ((row + 1) == Int(defaultOS)) {
+            let colorRow : Int = {
+                switch highlightColor {
+                    case "#DB3929": return 0
+                    case "#CB4E02": return 1
+                    case "#A97F00": return 2
+                    case "#879800": return 3
+                    case "#2EA098": return 4
+                    case "#1A88D5": return 5
+                    case "#6872C7": return 6
+                    case "#D23D83": return 7
+                    default: return 0
+                }
+            }()
+            if (row == Int(colorRow)) {
                 cell.accessoryType = .Checkmark
+                
             } else {
                 cell.accessoryType = .None
             }
@@ -74,9 +88,21 @@ class SettingsOSViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        defaultOS = String(indexPath.row + 1)
+        highlightColor = {
+            switch indexPath.row {
+            case 0: return "#DB3929"
+            case 1: return "#CB4E02"
+            case 2: return "#A97F00"
+            case 3: return "#879800"
+            case 4: return "#2EA098"
+            case 5: return "#1A88D5"
+            case 6: return "#6872C7"
+            case 7: return "#D23D83"
+                default: return ""
+            }
+        }()
         let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setValue(defaultOS, forKey: "defaultOS")
+        defaults.setValue(highlightColor, forKey: "highlightColor")
         self.tableView.reloadData()
         NSNotificationCenter.defaultCenter().postNotificationName("DidChangeThemeColor", object: nil)
     }
