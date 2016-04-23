@@ -51,10 +51,10 @@ class SettingsColorViewController: UITableViewController {
         
         if (isDarkTheme) {
             cell.backgroundColor = UIColor(red:0.09, green:0.13, blue:0.16, alpha:1.00)
-            cell.textLabel?.textColor = UIColor.whiteColor()
+            //cell.textLabel?.textColor = UIColor.whiteColor()
         } else {
             cell.backgroundColor = UIColor.whiteColor()
-            cell.textLabel?.textColor = UIColor.blackColor()
+            //cell.textLabel?.textColor = UIColor.blackColor()
         }
         
         let section = indexPath.section
